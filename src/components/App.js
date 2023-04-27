@@ -5,6 +5,7 @@ import AddContact from  './AddContact'
 import ContactList from  './ContactList'
 import { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import ContactDetails from './ContactDetails'
 
 const App = () => {
     const [contacts, setContacts] = useState(getInitialContact())
@@ -38,6 +39,7 @@ const App = () => {
         <Routes>
          <Route path='/' exact element={<ContactList contacts={contacts} getContactId={removeContactHandler} />} />
          <Route path='/add' element={<AddContact addContactHandler={addContactHandler} />} />
+        <Route path='/contact/:id' element={<ContactDetails />} />
         </Routes>
         {/* <AddContact addContactHandler={addContactHandler} />
         <ContactList contacts={contacts} getContactId={removeContactHandler} /> */}
