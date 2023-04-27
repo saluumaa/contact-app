@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from  './Header'
 import AddContact from  './AddContact'
 import ContactList from  './ContactList'
@@ -35,10 +35,10 @@ const App = () => {
     <div className='ui container'>
         <Router>
          <Header />
-         <Switch>
-         <Route path='/add' Component={AddContact} />
-         <Route path='/' Component={ContactList} />
-        </Switch>
+        <Routes>
+         <Route path='/' exact element={<ContactList contacts={contacts} getContactId={removeContactHandler} />} />
+         <Route path='/add' element={<AddContact addContactHandler={addContactHandler} />} />
+        </Routes>
         {/* <AddContact addContactHandler={addContactHandler} />
         <ContactList contacts={contacts} getContactId={removeContactHandler} /> */}
         </Router>
