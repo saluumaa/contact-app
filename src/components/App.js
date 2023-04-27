@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from  './Header'
 import AddContact from  './AddContact'
 import ContactList from  './ContactList'
@@ -10,7 +11,14 @@ const App = () => {
 
     const addContactHandler = (contact) => {
         console.log(contact)
-        setContacts([...contacts, {id: uuidv4(), ...contacts}])
+        setContacts([...contacts, {id: uuidv4(), ...contact}])
+    }
+
+    const removeContactHandler = (id) => {
+        const newContactList = contacts.filter((contact) => {
+            return contact.id !== id
+        })
+        setContacts(newContactList)
     }
 
     function getInitialContact() {
@@ -25,9 +33,15 @@ const App = () => {
 
   return (
     <div className='ui container'>
-        <Header />
-        <AddContact addContactHandler={addContactHandler} />
-        <ContactList contacts={contacts} />
+        <Router>
+         <Header />
+         <Switch>
+         <Route path='/add' Component={AddContact} />
+         <Route path='/' Component={ContactList} />
+        </Switch>
+        {/* <AddContact addContactHandler={addContactHandler} />
+        <ContactList contacts={contacts} getContactId={removeContactHandler} /> */}
+        </Router>
     </div>
   )
 }
